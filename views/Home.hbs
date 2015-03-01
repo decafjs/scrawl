@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/sunburst.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>{{title}}</h1>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+                {{#paths}}
+                    {{#directory}}
+                        <li role="presentation" class="list-group-item list-group-item-warning">{{name}}</li>
+                    {{/directory}}
+                    {{^directory}}
+                        <li role="presentation" class="list-group-item"><a href="#">{{name}}</a></li>
+                    {{/directory}}
+                {{/paths}}
+            </ul>
+        </div>
+        <div class="col-sm-9">{{{content}}}</div>
+    </div>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

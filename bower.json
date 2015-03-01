@@ -1,0 +1,29 @@
+{
+  "name"        : "scrawl",
+  "version"     : "0.0.1",
+  "authors"     : [
+    "Mike Schwartz <mike@moduscreate.com>"
+  ],
+  "description" : "Documentation generator for DecafJS",
+  "main"        : "app.js",
+  "keywords"    : [
+    "rhino",
+    "JavaScript",
+    "Sync",
+    "Documentation"
+  ],
+  "license"     : "MIT",
+  "homepage"    : "https://github.com/decafjs/scrawl",
+  "private"     : "false",
+  "dependencies": {
+    "decaf"            : "decafjs/decaf#master",
+    "decaf-jolt"       : "decafjs/decaf-jolt#master",
+    "decaf-jolt-static": "decafjs/decaf-jolt-static#master",
+    "decaf-jolt-sjs"   : "decafjs/decaf-jolt-sjs#master",
+    "decaf-hoganjs"    : "decafjs/decaf-hoganjs",
+    "marked"           : "0.3.x",
+    "dox"              : "tj/dox#0.5.x",
+    "jquery"           : "2.x",
+    "bootstrap"        : "3.x"
+  }
+}
