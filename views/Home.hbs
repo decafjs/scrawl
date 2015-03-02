@@ -4,33 +4,39 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/sunburst.min.css">
+    <link rel="stylesheet" href="/css/sunburst.min.css">
+    <style>
+        body {
+            /*padding-top: 70px;*/
+            padding-bottom: 70px;
+        }
+        .markdown {
+            margin: 0;
+            padding: 0;
+        }
+        .markdown h1 {
+            margin-top: 0 !important;
+        }
+    </style>
 </head>
 <body>
-
+{{>common/navbar}}
 <div class="container">
-    <h1>{{title}}</h1>
+    <!--<h1>{{title}}</h1>-->
 
     <div class="row">
         <div class="col-sm-3">
-            <ul class="list-group">
-                {{#paths}}
-                    {{#directory}}
-                        <li role="presentation" class="list-group-item list-group-item-warning">{{name}}</li>
-                    {{/directory}}
-                    {{^directory}}
-                        <li role="presentation" class="list-group-item"><a href="#">{{name}}</a></li>
-                    {{/directory}}
-                {{/paths}}
-            </ul>
+            {{> common/nav }}
         </div>
-        <div class="col-sm-9">{{{content}}}</div>
+        <div class="col-sm-9">
+            <div class="markdown">{{{content}}}</div>
+        </div>
     </div>
 </div>
 
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/js/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

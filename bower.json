@@ -24,6 +24,7 @@
     "marked"           : "0.3.x",
     "dox"              : "tj/dox#0.5.x",
     "jquery"           : "2.x",
+    "codemirror"       : "*",
     "bootstrap"        : "3.x"
   }
 }

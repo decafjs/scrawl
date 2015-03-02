@@ -3,5 +3,6 @@
  */
 
 module.exports = {
-    projectDirectory: __dirname + '/' + 'bower_components/decaf'
+    //projectDirectory: __dirname + '/' + 'bower_components/decaf'
+    projectDirectory: '/Users/mschwartz/github/decafjs/decaf'
 };

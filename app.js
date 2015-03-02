@@ -54,6 +54,8 @@ app.verb('images', StaticServer('images'));
 // serve / URL via Home controller
 app.verb('/', SjsFile('controllers/Home.sjs'));
 
+app.verb('documentation', SjsFile('controllers/Dox.sjs'));
+
 // '127.0.0.1' is localhost only
 // '0.0.0.0' to listen on all interfaces
 var listenAddress = '127.0.0.1';

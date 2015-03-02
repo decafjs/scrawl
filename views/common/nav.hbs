@@ -1,0 +1,15 @@
+<div class="list-group">
+    {{#paths}}
+        {{#directory}}
+            <div role="presentation" class="list-group-item list-group-item-warning">{{name}}</div>
+        {{/directory}}
+        {{^directory}}
+            {{#active}}
+                <a href="{{path}}" class="list-group-item active">{{name}}</a>
+            {{/active}}
+            {{^active}}
+                <a href="{{path}}" class="list-group-item">{{name}}</a>
+            {{/active}}
+        {{/directory}}
+    {{/paths}}
+</div>
