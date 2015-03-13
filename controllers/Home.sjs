@@ -26,16 +26,6 @@ decaf.each(bower_json.scrawl, function ( path ) {
         }
     });
 });
-//decaf.each(bower_json.scrawl, function ( path ) {
-//    decaf.each(new File(Config.projectDirectory + '/' + path).listRecursive(), function ( path ) {
-//        if ( new File(path).isDirectory() ) {
-//            paths.push({ directory : true, name : path.substr(base_len) });
-//        }
-//        else {
-//            paths.push({ directory : false, name : path.substr(base_len) });
-//        }
-//    });
-//});
 
 var readme = new File(base_dir + 'README.md').readAll();
 var document = {

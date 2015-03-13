@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/bower_components/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="/css/sunburst.min.css">
+    <style>
+        .CodeMirror {
+            height: auto;
+            border: 1px solid #eee;
+        }
+
+        .tab-pane h2 {
+            border-top: 1px solid black;
+            padding-top: 10px;
+        }
+
+        .tab-pane h3 {
+            padding: 0px;
+            font-size: 16px;
+        }
+        body {
+            /*padding-top: 70px; */
+            padding-bottom: 70px;
+        }
+    </style>
+</head>
+<body>
+
+{{>common/navbar}}
+<div class="container">
+    <!--<h1>{{title}}</h1>-->
+
+    <div class="row">
+        <div class="col-sm-3">
+            {{> common/nav }}
+        </div>
+        <div class="col-sm-9">
+            <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#documentation" aria-controls="documentation" role="tab" data-toggle="tab">Documentation</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#source" aria-controls="source" role="tab" data-toggle="tab">Source</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="documentation">
+                        {{{content}}}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="source">
+                        <textarea style="height: 100%" id="source-ta">{{{source}}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bower_components/codemirror/lib/codemirror.js"></script>
+<script src="/bower_components/codemirror/mode/javascript/javascript.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>
+    var cm = CodeMirror.fromTextArea(document.getElementById('source-ta'), {
+        lineNumbers : true,
+        mode        : 'javascript',
+        readOnly    : true,
+        autofocus   : true
+    });
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function ( e ) {
+        if ( e.target.innerHTML === "Source" ) {
+            cm.refresh();
+            cm.focus();
+        }
+    });
+    $('.cm-code').each(function ( ndx, item ) {
+        var cm = CodeMirror.fromTextArea(item, {
+            lineNumbers     : true,
+            mode            : 'javascript',
+            readOnly        : true,
+            firstLineNumber : parseInt($(item).attr('data-codeStart'), 10)
+        });
+    })
+</script>
+</body>
+</html>

@@ -13,32 +13,59 @@ var base_dir        = Config.projectDirectory + '/',
     source_filename = req.args.join('/');
 
 var paths = [
-    { directory: false, name: 'Home', path: '/' }
+    {directory : false, name : 'Home', path : '/'}
 ];
-decaf.each(bower_json.scrawl, function ( path ) {
-    decaf.each(new File(Config.projectDirectory + '/' + path).listRecursive(), function ( path ) {
+decaf.each(bower_json.scrawl, function (path) {
+    decaf.each(new File(Config.projectDirectory + '/' + path).listRecursive(), function (path) {
         var short_path = path.substr(base_len);
-        if ( new File(path).isDirectory() ) {
-            paths.push({ directory : true, name : short_path, path: '/documentation/'+short_path });
+        if (new File(path).isDirectory()) {
+            paths.push({directory : true, name : short_path, path : '/documentation/' + short_path});
         }
         else {
-            paths.push({ directory : false, name : short_path, path: '/documentation/'+short_path, active: short_path === source_filename });
+            paths.push({
+                directory : false,
+                name      : short_path,
+                path      : '/documentation/' + short_path,
+                active    : short_path === source_filename
+            });
         }
     });
 });
 
-var source    = new File(base_dir + source_filename).readAll(),
-    parsed    = dox.parseComments(source, { skipSingleStar : true }),
+var source = new File(base_dir + source_filename).readAll(),
+    parsed,
+    formatted,
+    content,
+    document;
+
+if (source_filename.endsWith('.md')) {
+    content = marked(source);
+
+    document = {
+        title     : source_filename,     // for <title> tag
+        base_path : base_dir,
+        paths     : paths,
+        date      : new Date().toLocaleDateString(),
+        source    : source,
+        content   : content
+    };
+
+    res.send(views['Markdown'].render(document, views));
+}
+else {
+    parsed = dox.parseComments(source, {skipSingleStar : true});
     formatted = builtin.print_r(dox.parseComments(source));
+    content = marked('```javascript\n' + formatted + '```')// marked(parsed);
 
-var document = {
-    title     : source_filename,     // for <title> tag
-    base_path : base_dir,
-    paths     : paths,
-    date      : new Date().toLocaleDateString(),
-    source    : source,
-    dox       : parsed,
-    content   : marked('```javascript\n' + formatted + '```')// marked(parsed)
-};
+    document = {
+        title     : source_filename,     // for <title> tag
+        base_path : base_dir,
+        paths     : paths,
+        date      : new Date().toLocaleDateString(),
+        source    : source,
+        dox       : parsed,
+        content   : content
+    };
 
-res.send(views[ 'Dox' ].render(document, views));
+    res.send(views['Dox'].render(document, views));
+}
